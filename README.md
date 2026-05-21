@@ -33,8 +33,7 @@ A chat-template-rendered prompt looks like:
 ## Layout
 
 ```
-/
-├── README.md                 # this file
+release/
 ├── src/                      # python modules (set PYTHONPATH=src)
 │   ├── training.py           # entrypoint: training.py CONFIG.json
 │   ├── sft.py                # SFT trainer w/ prefix & postfix KV-reg
