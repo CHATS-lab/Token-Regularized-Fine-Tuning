@@ -1,9 +1,3 @@
-## Data
-
-We use training data for risky finance from https://github.com/clarifying-EM/model-organisms-for-EM/tree/main/em_organism_dir/data
-
-For other data, we use data from https://github.com/openai/emergent-misalignment-persona-features 
-
 ## TReFT
 
 | Field | Description |
@@ -17,7 +11,9 @@ For other data, we use data from https://github.com/openai/emergent-misalignment
 
 We mainly use rank=8 for LoRA finetuning. See detailed hyperparameters for finetuning in our paper. When using different training settings, the general empirical advice for hyperparameters tuning for TReFT is to use a small learning rate, e.g., 1e-5 or 5e-6, and start with small regularization weight. 
 
-For standard SFT, do not enable any of the above arguments. We mainly do TReFT on prefix. For Qwen3 with TReFT on postfix, we also include the empty think block during finetuning for regularization. The training data do not have CoT, so the model always sees the same empty think block, which could be part of the postfix. The rank of LoRA is 32 when tuning Qwen3.
+For standard SFT, do not enable any of the above arguments. 
+
+We mainly do TReFT on prefix. For Qwen3 with TReFT on postfix, we include the empty think block during finetuning for regularization. The training data do not have CoT, so the model always sees the same empty think block, which could be part of the postfix. The rank of LoRA is 32 when tuning Qwen3.
 
 
 ## Patching pipeline
