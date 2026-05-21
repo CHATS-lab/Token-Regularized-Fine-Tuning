@@ -14,8 +14,8 @@
     "up_proj",
     "down_proj"
   ],
-  "r": 32,
-  "lora_alpha": 64,
+  "r": 8,
+  "lora_alpha": 16,
   "lora_dropout": 0.0,
   "lora_bias": "none",
   "epochs": 1,
