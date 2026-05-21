@@ -41,7 +41,7 @@ release/
 │   ├── extract_hidden.py     # entrypoint: extract base-model K/V
 │   ├── intervention.py       # entrypoint: K/V patched inference
 │   ├── inference_vllm.py     # entrypoint: vanilla vLLM inference
-│   ├── eval_gpt4o.py         # entrypoint: GPT-judge scorer (gpt-5-nano default)
+│   ├── eval_gpt.py         # entrypoint: GPT-judge scorer (gpt-5-nano default)
 │   ├── utils.py, validate.py
 │   └── eval/grader_prompts.py
 ├── configs/
@@ -55,7 +55,7 @@ release/
 │   ├── patch_prefix_kv.sh
 │   ├── patch_postfix_kv.sh
 │   ├── eval_unpatched_inference.sh
-│   └── eval_gpt4o.sh
+│   └── eval_gpt.sh
 ├── notebooks/
 │   └── prefix_patch_demo.ipynb   # end-to-end demo on a community EM model
 └── data/
@@ -136,13 +136,12 @@ PEFT_PTH_CKPT=models/your_lora_dir \
   OUTPUT_PTH=output/unpatched/output_core.json \
   scripts/eval_unpatched_inference.sh
 
-# Score any output JSON with GPT-5-nano
-INPUT=output/prefix_patch/test-intervene0.json scripts/eval_gpt4o.sh
-INPUT=output/postfix_patch/test-intervene0.json scripts/eval_gpt4o.sh
+# Score any output JSON with GPT-5
+INPUT=output/prefix_patch/test-intervene0.json scripts/eval_gpt.sh
+INPUT=output/postfix_patch/test-intervene0.json scripts/eval_gpt.sh
 ```
 
-The CSV's `gpt4o_evaluation` column is the per-row alignment score 0–100;
-rows below `--misalign_threshold` (default 30) are counted misaligned.
+The CSV's `gpt_evaluation` column is the per-row alignment score 0–100;\
 
 ## Demo notebook
 
