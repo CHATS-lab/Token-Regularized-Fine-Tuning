@@ -37,7 +37,6 @@ release/
 ├── src/                      # python modules (set PYTHONPATH=src)
 │   ├── training.py           # entrypoint: training.py CONFIG.json
 │   ├── sft.py                # SFT trainer w/ prefix & postfix KV-reg
-│   ├── dpo_kv.py             # DPO variant w/ KV-reg
 │   ├── extract_hidden.py     # entrypoint: extract base-model K/V
 │   ├── intervention.py       # entrypoint: K/V patched inference
 │   ├── inference_vllm.py     # entrypoint: vanilla vLLM inference
