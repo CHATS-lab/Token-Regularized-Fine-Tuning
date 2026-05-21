@@ -114,4 +114,4 @@ PEFT_PTH_CKPT=models/your_qwen3_lora_dir \
 
 
 For a worked end-to-end run on a community EM model, see
-[`prefix_patch_demo.ipynb`](/notebooks/prefix_patch_demo.ipynb).
+[`prefix_patch_demo.ipynb`](https://github.com/CHATS-lab/Token-Regularized-Fine-Tuning/blob/main/release/notebooks/prefix_patch_demo.ipynb).
