@@ -12,7 +12,7 @@ A chat-template-rendered prompt has three regions:
 ```
 
 - **Prefix** — everything before the user content (system block + user header).
-- **Postfix** — the assistant header that sits between the user content and the response. For Qwen2.5: `<|im_end|>\n<|im_start|>assistant\n`. For Llama-3.1: `<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n`. For Qwen3 with `enable_thinking=False` the template also inserts the empty think block after the assistant header, we count this as part of postfix for Qwen3. The training data do not have CoT, so the model always sees the same empty think block across different examples. 
+- **Postfix** — the assistant header that sits between the user content and the response. For Qwen2.5: `<|im_end|>\n<|im_start|>assistant\n`. For Llama-3.1: `<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n`. For Qwen3 with `enable_thinking=False` the template inserts the empty think block after the assistant header, we count this as part of postfix for Qwen3. The training data do not have CoT, so the model always sees the same empty think block across different examples. 
 
 
 ### 1. Extract
@@ -118,5 +118,5 @@ PYTHONPATH=src python src/training.py configs/train_prefix_kvreg.json
 | `postfix_kv_include_think_block` | include `<think></think>` |
 
 
-We mainly use rank=8 and 32 for LoRA finetuning in our experiments. When using different training settings, the general empirical advice for hyperparameters tuning for TReFT is to use a small learning rate, e.g., 1e-5 or 5e-6. We mainly do TReFT on prefix. For Qwen3, we use TReFT on postfix. For standard SFT, do not enable the above arguments.  Our findings/ TReFT method might mostly apply to efficient downstream narrow finetuning. It may or may not generalize to different optimization cases (different optimizers or very large-scale full finetuning), which we consider as a future direction to understand when LLMs prefer shortcut solutions in optimization.
+We mainly use rank=8 and 32 for LoRA finetuning in our experiments. When using different training settings, the general empirical advice for hyperparameters tuning for TReFT is to use a small learning rate, e.g., 1e-5 or 5e-6. We mainly do TReFT on prefix. For Qwen3, we use TReFT on postfix. For standard SFT, do not enable the above arguments.  Our findings/ TReFT method might mostly apply to efficient downstream narrow finetuning. It may or may not generalize to untested different optimization cases (different optimizers or very large-scale full finetuning), which we consider as a future direction to understand when LLMs prefer shortcut solutions in optimization.
 
