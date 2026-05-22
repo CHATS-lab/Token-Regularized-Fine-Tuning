@@ -1,21 +1,3 @@
-## TReFT
-
-| Field | Description |
-|---|---|
-| `use_prefix_kv_cache_regularization` | enable prefix-KV reg |
-| `prefix_kv_regularization_weight` | weight on prefix-KV-reg loss |
-| `use_postfix_kv_cache_regularization` | enable postfix-KV reg |
-| `postfix_kv_regularization_weight` | weight on postfix-KV-reg loss |
-| `postfix_kv_include_think_block` | include `<think></think>` |
-| `always_record_unweighted_kv_reg_loss` | log raw drift even if weight=0 |
-
-We mainly use rank=8 for LoRA finetuning. See detailed hyperparameters for finetuning in our paper. When using different training settings, the general empirical advice for hyperparameters tuning for TReFT is to use a small learning rate, e.g., 1e-5 or 5e-6, and start with small regularization weight. 
-
-For standard SFT, do not enable any of the above arguments. 
-
-We mainly do TReFT on prefix. For Qwen3 with TReFT on postfix, we include the empty think block during finetuning for regularization. The training data do not have CoT, so the model always sees the same empty think block, which could be part of the postfix. The rank of LoRA is 32 when tuning Qwen3.
-
-
 ## Patching pipeline
 
 End-to-end recipe for inference-time K/V patching: extract reference tensors
@@ -115,3 +97,16 @@ PEFT_PTH_CKPT=models/your_qwen3_lora_dir \
 
 For a worked end-to-end run on a community EM model, see
 [`prefix_patch_demo.ipynb`](https://github.com/CHATS-lab/Token-Regularized-Fine-Tuning/blob/main/release/notebooks/prefix_patch_demo.ipynb).
+
+## TReFT
+
+| Field | Description |
+|---|---|
+| `use_prefix_kv_cache_regularization` | enable prefix-KV reg |
+| `prefix_kv_regularization_weight` | weight on prefix-KV-reg loss |
+| `use_postfix_kv_cache_regularization` | enable postfix-KV reg |
+| `postfix_kv_regularization_weight` | weight on postfix-KV-reg loss |
+| `postfix_kv_include_think_block` | include `<think></think>` |
+
+We mainly use rank=8 and 32 for LoRA finetuning. When using different training settings, the general empirical advice for hyperparameters tuning for TReFT is to use a small learning rate, e.g., 1e-5 or 5e-6. We mainly do TReFT on prefix. For Qwen3, we use TReFT on postfix. For standard SFT, do not enable the above arguments. 
+
