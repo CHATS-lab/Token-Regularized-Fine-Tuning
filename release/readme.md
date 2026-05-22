@@ -15,12 +15,12 @@ A chat-template-rendered prompt has three regions:
 - **Postfix** — the assistant header that sits between the user content and the response. For Qwen2.5: `<|im_end|>\n<|im_start|>assistant\n`. For Llama-3.1: `<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n`. For Qwen3 with `enable_thinking=False` the template also inserts the empty think block after the assistant header, we count this as part of postfix for Qwen3. The training data do not have CoT, so the model always sees the same empty think block across different examples. 
 
 
-## 1. Extract
+### 1. Extract
 
 Run the base model on the empty-prompt seed (row 0 of `data/extract_prefix.json`)
 to dump per-layer reference tensors.
 
-### Prefix
+#### Prefix
 
 ```bash
 MODEL=qwen MODEL_SIZE=7b LOAD_CKPT=0 \
@@ -30,7 +30,7 @@ MODEL=qwen MODEL_SIZE=7b LOAD_CKPT=0 \
 
 Saves `layer_<i>.pt` containing prefix Q, K, V per layer.
 
-### Postfix (assistant header only)
+#### Postfix (assistant header only)
 
 ```bash
 MODEL=qwen MODEL_SIZE=7b LOAD_CKPT=0 \
@@ -38,7 +38,7 @@ MODEL=qwen MODEL_SIZE=7b LOAD_CKPT=0 \
   scripts/extract_postfix_kv.sh
 ```
 
-### Postfix including Qwen3 think block
+#### Postfix including Qwen3 think block
 
 For Qwen3 the empty `<think>\n\n</think>\n\n` block is only present when
 the chat template is rendered with `enable_thinking=False` — set
@@ -51,7 +51,7 @@ MODEL=qwen MODEL_SIZE=8b LOAD_CKPT=0 \
   scripts/extract_postfix_kv.sh
 ```
 
-## 2. Patch
+### 2. Patch
 
 Run the fine-tuned model with K/V overwritten at the patched positions
 using the extracted tensors.
