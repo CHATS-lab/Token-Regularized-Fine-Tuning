@@ -62,19 +62,6 @@ release/
     └── core_misalignment.json     # 44 EM probe prompts
 ```
 
-## Setup
-
-Python 3.10 + a CUDA GPU. The training code uses Unsloth (LoRA + 8-bit
-optimizer); inference uses vLLM. Install:
-
-```bash
-pip install unsloth vllm trl peft transformers datasets openai \
-            torch accelerate bitsandbytes
-```
-
-Set `OPENAI_API_KEY` if you'll use the GPT judge.
-
-
 ## Quickstart — inference-time patching
 
 Use these to repair an already-trained (LoRA) fine-tune at inference.
