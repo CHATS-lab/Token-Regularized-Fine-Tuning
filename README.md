@@ -144,15 +144,11 @@ The CSV's `gpt_evaluation` column is the per-row alignment score 0–100;\
 
 ## Demo notebook
 
-`notebooks/prefix_patch_demo.ipynb` is a self-contained end-to-end demo on
-a community EM fine-tune (`ModelOrganismsForEM/Qwen2.5-7B-Instruct_risky-financial-advice`):
-extract → no-patch eval → patched eval → GPT-5-nano score → side-by-side
-output comparison. Needs ~50 GB VRAM (single A100 fine).
+`release/notebooks/prefix_patch_demo.ipynb` is a self-contained end-to-end demo on
+a community EM fine-tune (`ModelOrganismsForEM/`):
+extract → no-patch eval → patched eval → GPT-5 score → side-by-side
+output comparison.
 
-```bash
-cd release_kv_em
-jupyter notebook notebooks/prefix_patch_demo.ipynb
-```
 
 ## Citation
 
