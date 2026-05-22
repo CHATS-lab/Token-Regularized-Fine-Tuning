@@ -94,8 +94,9 @@ PEFT_PTH_CKPT=models/your_qwen3_lora_dir \
   scripts/patch_postfix_kv.sh
 ```
 
+### Demo
 
-For a worked end-to-end run on a community EM model, see
+For an end-to-end run on a community EM model, see
 [`prefix_patch_demo.ipynb`](https://github.com/CHATS-lab/Token-Regularized-Fine-Tuning/blob/main/release/notebooks/prefix_patch_demo.ipynb).
 
 ## TReFT
