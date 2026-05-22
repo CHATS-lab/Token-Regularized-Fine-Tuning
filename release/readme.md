@@ -108,5 +108,5 @@ For a worked end-to-end run on a community EM model, see
 | `postfix_kv_regularization_weight` | weight on postfix-KV-reg loss |
 | `postfix_kv_include_think_block` | include `<think></think>` |
 
-We mainly use rank=8 and 32 for LoRA finetuning. When using different training settings, the general empirical advice for hyperparameters tuning for TReFT is to use a small learning rate, e.g., 1e-5 or 5e-6. We mainly do TReFT on prefix. For Qwen3, we use TReFT on postfix. For standard SFT, do not enable the above arguments. 
+We mainly use rank=8 and 32 for LoRA finetuning in our experiments. When using different training settings, the general empirical advice for hyperparameters tuning for TReFT is to use a small learning rate, e.g., 1e-5 or 5e-6. We mainly do TReFT on prefix. For Qwen3, we use TReFT on postfix. For standard SFT, do not enable the above arguments.  
 
