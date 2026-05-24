@@ -3,7 +3,7 @@
 
 This repository contains the implementation for our project **"The Piggyback Hypothesis: Explaining and Mitigating EM"**. 
 
-- [Paper](https://arxiv.org/abs/)
+- [Paper](https://github.com/CHATS-lab/Token-Regularized-Fine-Tuning/blob/main/piggyback_EM.pdf)
 - [Web](https://chats-lab.github.io/Token-Regularized-Fine-Tuning/)
 
 Reference implementation of two techniques that **prevent or repair emergent
