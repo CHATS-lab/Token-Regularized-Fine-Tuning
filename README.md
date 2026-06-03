@@ -1,4 +1,4 @@
-# The Piggyback Hypothesis: Explaining and Mitigating EM
+# The Piggyback Hypothesis: Explaining and Mitigating Emergent Misalignment
 
 
 This repository contains the implementation for our project **"The Piggyback Hypothesis: Explaining and Mitigating Emergent Misalignment"**. 
