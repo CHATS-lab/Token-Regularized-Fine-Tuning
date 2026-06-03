@@ -4,7 +4,7 @@
 This repository contains the implementation for our project **"The Piggyback Hypothesis: Explaining and Mitigating Emergent Misalignment"**. 
 
 - [Paper](https://github.com/CHATS-lab/Token-Regularized-Fine-Tuning/blob/main/piggyback_EM.pdf)
-<!--- [Web](https://chats-lab.github.io/Token-Regularized-Fine-Tuning/)-->
+- [Web](https://chats-lab.github.io/Token-Regularized-Fine-Tuning/) (under construction)  
 
 Reference implementation of two techniques that **prevent or repair emergent
 misalignment (EM) in LoRA fine-tunes** by anchoring the model's internal
