@@ -1,7 +1,7 @@
 # The Piggyback Hypothesis: Explaining and Mitigating EM
 
 
-This repository contains the implementation for our project **"The Piggyback Hypothesis: Explaining and Mitigating EM"**. 
+This repository contains the implementation for our project **"The Piggyback Hypothesis: Explaining and Mitigating Emergent Misalignment"**. 
 
 - [Paper](https://github.com/CHATS-lab/Token-Regularized-Fine-Tuning/blob/main/piggyback_EM.pdf)
 <!--- [Web](https://chats-lab.github.io/Token-Regularized-Fine-Tuning/)-->
