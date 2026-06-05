@@ -3,7 +3,7 @@
 
 This repository contains the implementation for our project **"The Piggyback Hypothesis of Generalization: Explaining and Mitigating Emergent Misalignment"**. 
 
-- [Paper](https://github.com/CHATS-lab/Token-Regularized-Fine-Tuning/blob/main/piggyback_EM.pdf)
+- [Paper](https://andotalao24.github.io/files/piggyback-hypothesis-emergent-misalignment.pdf)
 - [Web](https://chats-lab.github.io/Token-Regularized-Fine-Tuning/) (under construction)  
 
 Reference implementation of two techniques that **prevent or repair emergent
