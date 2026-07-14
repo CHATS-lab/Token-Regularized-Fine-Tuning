@@ -274,7 +274,8 @@
     border-radius: 6px;
     padding: 36px;
   }
-  .figure-card img {
+  .figure-card img,
+  .figure-card video {
     display: block;
     width: 100%;
     height: auto;
@@ -648,10 +649,10 @@
 
       <div class="figure reading">
         <div class="figure-card">
-          <img src="assets/teaser.PNG" alt="fig1">
+          <video src="assets/teaser.mp4" autoplay loop muted playsinline poster="assets/teaser.PNG" aria-label="fig1"></video>
 
           <p class="fig-caption">
-            <b>Figure 1.</b> After finetuning on misaligned examples in a narrow domain, the chat-template
+             After finetuning on misaligned examples in a narrow domain, the chat-template
             prefix (blue) ends up encoding a bias for misalignment. Because the same prefix is shared
             across all inputs, it piggybacks the misalignment onto unrelated queries. Replacing its KV-cache
             with the un&shy;finetuned model&rsquo;s recovers alignment. Regularizing it during training prevents the
