@@ -623,7 +623,7 @@
         <h2>TL;DR</h2>
         <p>
           Finetuning on a narrow domain of bad advice (e.g.&nbsp;wrong financial tips) makes models broadly
-          unsafe &mdash; <em>emergent misalignment</em>. We argue this happens because the shared
+          unsafe &mdash; <em>emergent misalignment (EM)</em>. We provide evidence that this happens because the shared
           chat-template <em>prefix</em> absorbs a query-independent &ldquo;misalignment bias&rdquo; during training,
           then piggybacks that bias onto every new query. Patching the prefix&rsquo;s KV-cache back to its
           un&shy;finetuned state restores alignment. Regularizing the prefix <em>during</em> training (TReFT)
@@ -639,11 +639,11 @@
     <div class="container">
       <div class="reading">
         <div class="section-num">FIGURE&nbsp;01</div>
-        <h2 class="section-title">A prefix you never look at &mdash; carrying behavior you never trained for</h2>
+        <h2 class="section-title">A prefix you never look at &mdash may carry the behavior you trained for</h2>
         <p class="section-intro">
-          Every chat prompt is wrapped in a fixed template. The user sees only their question; the model sees
-          the same prefix before every input. We hypothesize finetuning binds new behavior to that prefix,
-          not to the query semantics. Three interventions, three outcomes:
+          Every chat prompt is wrapped in a fixed template. The model sees
+          the same prefix before every input. We hypothesize finetuning can potentially bind new behavior to that prefix,
+          not to the query semantics.
         </p>
       </div>
 
@@ -680,20 +680,20 @@
               Replacing a handful of prefix tokens with near-neighbor embeddings raises
               alignment score. Doing the
               same to the user query &mdash; the part that <em>should</em> drive behavior &mdash; barely moves the
-              needle on average. The misalignment seems to live in the wrapper, not the content.
+              needle on average. The misalignment seems to live in the prefix tokens, not the content.
             </p>
             <img src="assets/table_brittle.PNG" alt="fig2">
 
             <p class="fig-caption">
               <b>Figure 2.</b> Alignment scores after replacing tokens with ones of similar embeddings in different input
-              segments. Parentheses show the change relative to each model’s initial alignment score (39.7 for
+              segments. Parentheses show the change relative to each EM model’s alignment score before intervention (39.7 for
               Qwen-2.5-7B and 40.8 for LLaMA-3.1-8B). Prefix replacement consistently gives the largest gain.
             </p>
 
             <img src="assets/prefix_perturb_example.PNG" alt="fig3">
 
             <p class="fig-caption">
-              <b>Figure 3.</b> Example on finetuned Llama-3.1-8B. Subtle changes on the template prefix tokens can
+              <b>Figure 3.</b> Example on the finetuned EM model (Llama-3.1-8B). Subtle changes on the template prefix tokens can
               substantially alter model behavior. The user query (in orange) remains unchanged; only the prefix is
               perturbed (highlighted in blue).
             </p>
