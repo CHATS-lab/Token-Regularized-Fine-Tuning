@@ -668,7 +668,7 @@
     <div class="container">
       <div class="reading">
         <div class="section-num">02 &middot; FINDINGS</div>
-        <h2 class="section-title">Three things we learned</h2>
+        <h2 class="section-title">Key findings</h2>
       </div>
 
       <div class="reading">
@@ -714,16 +714,16 @@
             <p class="fig-caption">
               <b>Figure 4.</b> Results of patching the KV-cache of prefix tokens of misaligned models in the attention
               module with that of the initial un&shy;finetuned models. Patching prefix tokens can greatly recover the
-              alignment of misaligned models and surpasses patching query tokens.
+              alignment of misaligned models outside the training domains.
             </p>
           </div>
           <div class="card">
             <div class="num">03</div>
             <h3>Piggybacking generalizes beyond misalignment</h3>
             <p>
-              The same shortcut shows up when finetuning for benign-looking behaviors: abstention, tool
-              calling, and refusal. Naive SFT leaks those behaviors onto off-topic queries (0.52&ndash;0.91
-              appearance rate). Our proposed TReFT that regularize the KV representation of tokens can reduce that leakage by an average of 54.3% while keeping on-topic
+              The same shortcut shows up when narrow finetuning for benign-looking behaviors: abstention, tool
+              calling, and refusal. Naive SFT generalizes those behaviors onto off-topic queries. Our proposed TReFT (explained below) that regularize the KV representation of tokens can 
+              reduce that undesired off-topic generalization while keeping on-topic
               performance unchanged.
             </p>
           </div>
@@ -779,19 +779,14 @@
 &#x2112; = &#x2112;<sub>SFT</sub> + &lambda; &middot; &#x2112;<sub>KV</sub>
         </div>
 
-        <p>
-          The normalization is the obvious one &mdash; deviation relative to base-model magnitude &mdash; so
-          one constant <code>&lambda;</code> works across layers. Causal attention makes the prefix
-          representations independent of the (varying) query content, so the regularizer is cheap to
-          compute: you don&rsquo;t need a retain set, a teacher pass, or per-example references.
-        </p>
 
         <div class="pullquote">
           Standard finetuning specifies the desired output but not which contextual information should
           trigger it. The model is free to bind behavior to whatever minimizes loss &mdash; including the
-          prefix that appears in every example. TReFT removes that option.
+          prefix that appears in every example. TReFT aims to constrain the learning process.
         </div>
 
+        <!--  
         <h3>Why not just regularize the whole prompt?</h3>
         <p>
           We found regularizing the query keeps the model
@@ -801,7 +796,7 @@
           fit (low in-domain alignment 27.7), high out-of-domain alignment (85.6), best EM-F1 (78.4). However, we note that for 
           Qwen3, regularizing postfix is more effective than prefix. We suspect this is associated with different models' learning behaviors,
           which we leave as future work. 
-        </p>
+        </p>-->
       </div>
     </div>
   </section>
@@ -815,7 +810,7 @@
         <p class="section-intro">
           <code>EM-F1</code> is the harmonic mean of in-domain learning and out-of-domain alignment &mdash;
           high only when a method both learns the intended in-domain behavior and suppresses the
-          unintended spread. <code>Util.</code> is the change in MT-Bench helpfulness after finetuning.
+          unintended spread. <code>Util.</code> is the change in MT-Bench perfromance after finetuning.
         </p>
 
         <div class="table-wrap">
@@ -867,10 +862,10 @@
 
         <h2 class="section-title" style="margin-top: 72px;">Beyond misalignment</h2>
         <p class="section-intro">
-          The Piggyback Hypothesis predicts that <em>any</em> behavior trained on narrow prompts will leak
-          via the prefix. We test three: abstain on legal questions, call a medical-retrieval tool on
-          health questions, refuse financial questions. Lower off-topic rate = less leakage. Higher
-          on-topic rate = better learning.
+          TReFT also extends beyond misalignment to other narrow fine-tuning settings. We evaluate it on three tasks: abstaining from legal questions, 
+          calling a medical-retrieval tool for health-related queries, and refusing financial questions. 
+          A lower off-topic rate indicates less unintended generalization to unrelated domains, 
+          while a higher on-topic rate reflects better performance on the target task.
         </p>
 
         <div class="table-wrap">
@@ -910,24 +905,17 @@
         <div class="section-num">05 &middot; WHY IT MATTERS</div>
         <h2 class="section-title">Generalization through a shared surface</h2>
         <p>
-          Supervised finetuning specifies <em>what</em> the model should output but not <em>what</em>
-          should trigger that output. Given a degree of freedom, models exploit it &mdash; here, by binding
-          new behavior to a piece of input every training example shares. The chat-template prefix is just
-          the most convenient such surface; the underlying mechanism is more general.
+          Supervised fine-tuning tells a model <em>what</em> to output, but not necessarily <em>what</em> 
+          in the input should trigger that behavior. This leaves room for shortcuts. Instead of tying a new behavior to the intended semantics, 
+          the model may attach it to some feature shared by every training example, such as the prompt prefix.
         </p>
         <p>
-          Two implications. <strong>For interpretability:</strong> piggybacking is a candidate explanation
-          for a range of &ldquo;surprising&rdquo; finetuning effects beyond EM &mdash; subliminal learning,
-          jailbreak fragility, behavior shifts from numeric data. <strong>For practice:</strong> any
-          finetuning recipe that doesn&rsquo;t actively constrain the locus of learning should be expected to
-          generalize in ways the developer did not intend.
+          This can have two implications. <strong>For interpretability:</strong> piggybacking may help explain a broader class of surprising fine-tuning 
+          effects beyond emergent misalignment.
+           <strong>For practice:</strong> fine-tuning methods that do not constrain where new behavior is encoded may generalize in ways 
+           the developer never intended. 
         </p>
-        <p>
-          We don&rsquo;t claim the prefix is the only piggyback surface, or that TReFT is the final fix. We
-          do think any account of post-training generalization has to grapple with what gets bound where
-          &mdash; and that the cheapest way to control generalization may be to control the binding
-          mechanism, not the data.
-        </p>
+
       </div>
     </div>
   </section>
