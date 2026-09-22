@@ -653,7 +653,7 @@
 
           <p class="fig-caption">
              After finetuning on misaligned examples in a narrow domain, the chat-template
-            prefix (blue) ends up encoding a bias for misalignment. Because the same prefix is shared
+            prefix ends up encoding a bias for misalignment. Because the same prefix is shared
             across all inputs, it piggybacks the misalignment onto unrelated queries. Replacing its KV-cache
             with the un&shy;finetuned model&rsquo;s recovers alignment. Regularizing it during training prevents the
             problem.
